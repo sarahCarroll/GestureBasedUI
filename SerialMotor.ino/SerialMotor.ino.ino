@@ -1,4 +1,15 @@
-#include <SoftwareSerial.h>
+#include <SoftwareSerial.h>   //Software Serial Port
+#define RxD 2
+#define TxD 3
+
+//#include <MyoController.h>
+#include <Servo.h>
+#define trigPin 3 // green
+#define echoPin 4 // red
+#include <Wire.h>
+#include <Adafruit_MotorShield.h>
+#include "utility/Adafruit_MS_PWMServoDriver.h"
+
 
 #define txPin 3
 #define rxPin 4
