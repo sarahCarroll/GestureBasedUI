@@ -1,11 +1,16 @@
 #include <Servo.h>
 #include <MyoController.h>
+#include <SoftwareSerial.h>
 
+#define RxD 2
+#define TxD 3
 
-#define WAVEIN_PIN 9
-#define WAVEOUT_PIN 9
+#define WAVE_PIN 9
 #define FINGERSSPREAD_PIN 11
-#define DOUBLETAP_PIN 11
+
+
+String inData;
+SoftwareSerial BLE(RxD,TxD);
 
 MyoController myo = MyoController();
 Servo serv;
@@ -17,51 +22,50 @@ void setup() {
   pinMode(9, OUTPUT);
   pinMode(11, OUTPUT);
 
+ pinMode(RxD, INPUT);
+pinMode(TxD, OUTPUT);
 
-  pinMode(WAVEIN_PIN, OUTPUT);
-  pinMode(WAVEOUT_PIN, OUTPUT);
+  pinMode(WAVE_PIN, OUTPUT);
   pinMode(FINGERSSPREAD_PIN, OUTPUT);
-  pinMode(DOUBLETAP_PIN, OUTPUT);
+
   Serial.begin(9600);
   myo.initMyo();
-  digitalWrite(3,HIGH);
-  delay(300);
-  digitalWrite(3,LOW);
-  delay (150);
-  digitalWrite(3,HIGH);
-  delay(300);
-  digitalWrite(3,LOW);
-  delay (300);
-  digitalWrite(3,HIGH);
-  delay(1500);
-  digitalWrite(3,LOW);
   
 }
 
 void loop(){
+ 
    myo.updatePose();
    switch ( myo.getCurrentPose() ) {
     case rest:
-
-      digitalWrite(9,LOW);
+      analogWrite(FINGERSSPREAD_PIN,0); 
+      digitalWrite(WAVE_PIN,LOW);
+      digitalWrite(FINGERSSPREAD_PIN,LOW);
       break;
 
     case waveIn:
-      digitalWrite(WAVEIN_PIN,HIGH);
+      digitalWrite(WAVE_PIN,HIGH);
       digitalWrite(9, HIGH);
-      servo1.write(0);
+      servo1.write(30);
       break;
     case waveOut:
-      digitalWrite(WAVEOUT_PIN,HIGH);
+      digitalWrite(WAVE_PIN,HIGH);
       digitalWrite(9, HIGH);
-      servo1.write(180);
+      servo1.write(150);
       break;
     case fingersSpread:
      digitalWrite(FINGERSSPREAD_PIN,HIGH);
+     digitalWrite(11, HIGH);
       break;
-//    case doubleTap:
-//       digitalWrite(DOUBLETAP_PIN,LOW);
-//      break;
+   /* case doubletap:
+    //LED Lights
+   
+    break;
+    case fist:
+    //LED Lights
+     
+      break;*/
+
    } 
    delay(1);
 }
