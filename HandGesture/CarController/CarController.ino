@@ -7,7 +7,7 @@
 
 #define WAVE_PIN 9
 #define FINGERSSPREAD_PIN 11
-
+#define LIGHTS_PIN 5
 
 String inData;
 SoftwareSerial BLE(RxD,TxD);
@@ -21,10 +21,12 @@ void setup() {
   servo1.attach(9);
   pinMode(9, OUTPUT);
   pinMode(11, OUTPUT);
+  pinMode(5, OUTPUT);
 
  pinMode(RxD, INPUT);
 pinMode(TxD, OUTPUT);
 
+  pinMode(LIGHTS_PIN, OUTPUT);
   pinMode(WAVE_PIN, OUTPUT);
   pinMode(FINGERSSPREAD_PIN, OUTPUT);
 
@@ -37,12 +39,6 @@ void loop(){
  
    myo.updatePose();
    switch ( myo.getCurrentPose() ) {
-    case rest:
-      analogWrite(FINGERSSPREAD_PIN,0); 
-      digitalWrite(WAVE_PIN,LOW);
-      digitalWrite(FINGERSSPREAD_PIN,LOW);
-      break;
-
     case waveIn:
       digitalWrite(WAVE_PIN,HIGH);
       digitalWrite(9, HIGH);
@@ -57,14 +53,22 @@ void loop(){
      digitalWrite(FINGERSSPREAD_PIN,HIGH);
      digitalWrite(11, HIGH);
       break;
-   /* case doubletap:
+    case doubleTap:
     //LED Lights
-   
+    if(digitalRead(5) == LOW){
+     digitalWrite(LIGHTS_PIN,HIGH);
+     digitalWrite(5, HIGH);
+    }else {
+      digitalWrite(LIGHTS_PIN,LOW);
+      digitalWrite(5, LOW);
+    }
     break;
     case fist:
-    //LED Lights
-     
-      break;*/
+    //CAR GOES STRAIGHT
+     digitalWrite(WAVE_PIN,HIGH);
+     digitalWrite(9, HIGH);
+     servo1.write(90);
+      break;
 
    } 
    delay(1);
