@@ -23,7 +23,7 @@ Here is a video of this project in action. This was a requirement for submission
 
 For our project we have used the programming language Ino. This is equivalent to Cpp. The arduino files are .ino.
 
-The CarController folder is the folder that contains ino we coded.
+The CarController folder is the folder that contains ino file we coded.
 The numbers are the pins that are connected to the arduino board in the example below.
 ```
 #define WAVE_PIN 9
@@ -41,7 +41,7 @@ switch ( myo.getCurrentPose() ) {
       servo1.write(30);
       break;
 ```
-The libraries folder contains c that references the Myo gestures so the arduino can recognise them and you can see in the application window which gesture you preformed.
+The libraries folder contains cpp files that references the Myo gestures so the arduino can recognise them and you can see in the application window which gesture you preformed.
 ```
 if(msgChar.indexOf("rest")>=0)
 	{
