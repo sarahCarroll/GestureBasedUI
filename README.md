@@ -1,5 +1,9 @@
 # Gesture Based User Interface
 
+This project is a 4th year assignment for the module Gesture Based UI Development.
+
+Author: Abigail Culkin and Sarah Carroll
+
 ## How to Run the application
 
 1. In order to run this application. The user must have arduino desktop application.This is downloadable from the windows store.
