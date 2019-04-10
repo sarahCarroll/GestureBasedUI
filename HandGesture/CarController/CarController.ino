@@ -12,6 +12,7 @@
 #define tx 1
 
 String inData;
+//bluetooth
 SoftwareSerial BLE(tx, rx);
 
 // declaring the myoController function from the libraries
@@ -82,4 +83,25 @@ void loop(){
 
    } 
    delay(1);
+
+  //Testing the bluetooth - wires broken in arduino car
+   /*
+       while(BLE.available()){
+    char c = BLE.read();
+    BLE.print(c);
+
+    c = Serial.read();
+
+   if (c == 1) {
+    digitalWrite(13, HIGH);
+    }
+
+    if( == 0)
+      digitalWrite (13, LOW);
+  }
+  BLE.println(counter);
+  counter++;
+  delay(1000);
+}
+   */
 }
